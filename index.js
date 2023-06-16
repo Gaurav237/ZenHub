@@ -29,6 +29,7 @@ app.use(session({
 
 app.use(passport.initialize());  // initializes Passport.js.
 app.use(passport.session());  // enables session support for Passport.js
+app.use(passport.setAuthenticatedUser);
 
 // routes => for handling requests made to url('/')
 app.use('/', require('./routes'));
