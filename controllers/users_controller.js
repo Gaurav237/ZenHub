@@ -77,3 +77,26 @@ module.exports.destroySession = function(req, res, next){
     });  
     return res.redirect('/');
 }
+
+// update profile page
+module.exports.update = async function(req, res) {
+    const userId = req.params.id;
+
+    if (req.user.id == userId) {
+        try {
+            await User.findByIdAndUpdate(userId, {
+                email: req.body.email,
+                name: req.body.name,
+                password: req.body.password
+            });
+
+            console.log('User information updated');
+            return res.redirect('back');
+        } catch (err) {
+            console.log('Error in updating user information');
+            return res.redirect('back');
+        }
+    } else {
+        return res.status(401).send('Unauthorized');
+    }
+};
