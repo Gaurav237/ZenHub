@@ -8,7 +8,7 @@
         <% if (locals.user) { %>
           <form action="/posts/create" id="new-post-form" method="POST" class="mb-3">
             <div class="form-group">
-              <textarea class="form-control" name="content" rows="5" placeholder="Start typing here ..."></textarea>
+              <textarea class="form-control" name="content" rows="5" placeholder="Start typing here ..." required></textarea>
             </div>
             <button type="submit" class="btn btn-primary mt-3">Post</button>
           </form>
@@ -39,26 +39,40 @@
                                 <small class="text-muted">Posted on: <%= post.createdAt.toISOString().substr(0,10) %></small>
                               </div>
                             </div>
-                            <div class="collapse mt-3" id="commentsCollapse-<%= post.id %>">
-                              <div class="card">
-                                <div class="card-body">
-                                  <h6 class="card-title">Comments</h6>
-                                  <% if (locals.user) { %>
-                                    <form action="/comments/create" method="POST" class="mb-3">
-                                      <div class="form-group d-flex">
-                                        <input type="text" class="form-control" name="post_content" placeholder="Type here to add a comment...">
-                                        <input type="hidden" name="post_id" value="<%= post._id %>">
-                                        <button type="submit" class="btn btn-primary ms-4">Comment</button>
+                            <div id="posts-list-container">
+                                <div class="collapse mt-3" id="commentsCollapse-<%= post.id %>">
+                                  <div class="card">
+                                    <div class="card-body">
+                                      <h6 class="card-title">Comments</h6>
+                                      <% if (locals.user) { %>
+                                        <form action="/comments/create" method="POST" class="mb-3">
+                                          <div class="form-group d-flex">
+                                            <input type="text" class="form-control" name="post_content" placeholder="Type here to add a comment..." required>
+                                            <input type="hidden" name="post_id" value="<%= post._id %>">
+                                            <button type="submit" class="btn btn-primary ms-4">Comment</button>
+                                          </div>
+                                        </form>
+                                      <% } %>
+                                        <div class="post-comments-list">
+                                          <ul id="post-comments-<%= post._id %>" class="list-group">
+                                            <% for (comment of post.comments) { %>
+                                              <li id="comment-<%= comment._id %>" class="list-group-item">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                  <div>
+                                                    <h6 class="mb-0 small text-muted"><%= comment.user.name %></h6>
+                                                  </div>
+                                                  <div>
+                                                    <button class="btn btn-sm btn-danger"><i class="fa-solid fa-trash fa-xs"></i></button>
+                                                  </div>
+                                                </div>
+                                                <p class="mb-0 font-weight-bold"><%= comment.content %></p>
+                                              </li> 
+                                            <% } %>
+                                          </ul>
                                       </div>
-                                    </form>
-                                  <% } %>
-                                  <!-- <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">Comment 1</li>
-                                    <li class="list-group-item">Comment 2</li>
-                                    <li class="list-group-item">Comment 3</li>
-                                  </ul> -->
+                                    </div>
+                                  </div>
                                 </div>
-                              </div>
                             </div>
                             <hr>
                           </div>
