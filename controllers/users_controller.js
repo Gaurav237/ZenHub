@@ -1,10 +1,17 @@
 const User = require('../models/user');
 
-module.exports.profile = function(req, res){
-    return res.render('user_profile', {
-        title: "Profile"
-    });
-}
+module.exports.profile = async function(req, res) {
+    try {
+      const user = await User.findById(req.params.id);
+      return res.render('user_profile', {
+        title: 'User Profile',
+        profile_user: user
+      });
+    } catch (err) {
+      console.log('Error in finding profile page of user', err);
+      return res.redirect('back');
+    }
+};
 
 module.exports.signUp = function(req, res){
     // restricting page access

@@ -15,7 +15,9 @@
           <h5 class="text-white mb-3">Quick links</h5>
           <ul class="list-unstyled text-muted">
             <li><a href="/">Home</a></li>
-            <li><a href="/users/profile">Profile</a></li>
+            <% if (locals.user){ %>
+              <li><a href="/users/profile/<%= locals.user.id %>">Profile</a></li>
+            <% } %>
             <li><a href="#">About</a></li>
             <li><a href="#">Privacy Policy</a></li>
             <li><a href="#">Terms of Service</a></li>
