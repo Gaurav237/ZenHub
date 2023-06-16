@@ -16,11 +16,13 @@ module.exports.create = async function (req, res) {
             post.comments.push(comment);  // add this comment to that post
             post.save();  //  save the changes made to the post object back to the database
         
+            req.flash('success', 'comment posted !');
             return res.redirect('/');
         }else{
             return res.redirect('/');
         }
     }catch(err){
+        req.flash('error', err);
         return res.redirect('/');
     }
 }
@@ -42,11 +44,13 @@ module.exports.destroy = async function(req, res) {
             // delete this comment id from Post comments array
             await Post.findByIdAndUpdate(postId, {$pull: {comments: req.params.id}});
             
+            req.flash('success', 'comment deleted !')
             return res.redirect('back');
         }else{
             return res.redirect('back');
         }
     }catch(err){
+        req.flash('error', err);
         return res.redirect('back');
     }
 }

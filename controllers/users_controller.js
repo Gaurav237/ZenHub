@@ -8,7 +8,7 @@ module.exports.profile = async function(req, res) {
         profile_user: user
       });
     } catch (err) {
-      console.log('Error in finding profile page of user', err);
+      req.flash('error', err);
       return res.redirect('back');
     }
 };
@@ -39,6 +39,7 @@ module.exports.signIn = function(req, res){
 // to get the sign up data for the user
 module.exports.create = async function(req, res){
     if(req.body.password != req.body.confirm_password){
+        req.flash('error', 'Password & Confirm Password did not match !');
         return res.redirect('back');
     }
 
@@ -51,13 +52,16 @@ module.exports.create = async function(req, res){
                 email: req.body.email,
                 password: req.body.password
             });
+            req.flash('success' ,'Congratulations! You have successfully signed up. Welcome to our community! ');
             return res.redirect('/users/sign-in');
 
         }else{
+            req.flash('error', 'User with same email id already exists!');
             return res.redirect('back');
         }
 
     } catch(err) {
+        req.flash('error', err);
         return;
     }
 }
@@ -73,10 +77,15 @@ module.exports.destroySession = function(req, res, next){
 
     req.logout(err => {
         if(err){
+            req.flash('error', err);
             return next(err);
         }
     });  
-    return res.redirect('/');
+
+    req.session.save(() => {
+        req.flash('success', 'You have been successfully logged out. Come back soon!');
+        return res.redirect('/');
+    });
 }
 
 // update profile page
@@ -91,10 +100,10 @@ module.exports.update = async function(req, res) {
                 password: req.body.password
             });
 
-            console.log('User information updated');
+            req.flash('success', 'User information updated!');
             return res.redirect('back');
         } catch (err) {
-            console.log('Error in updating user information');
+            req.flash('error', err);
             return res.redirect('back');
         }
     } else {
