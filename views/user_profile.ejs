@@ -1,6 +1,13 @@
-<h1>
-    FakeBook / Profile Page
-</h1>
-
-<p> <%= user.name %> </p>
-<p> <%= user.email %> </p>
+<div class="container">
+    <div class="row justify-content-center mt-5">
+      <div class="col-md-6">
+        <div class="text-center">
+          <img class="rounded-circle" src="https://static.vecteezy.com/system/resources/previews/005/544/718/original/profile-icon-design-free-vector.jpg" alt="Profile Image" width="200" height="200">
+        </div>
+        <div class="text-center mt-3">
+          <h2 class="font-weight-bold m-4"> <%= user.name %> </h2>
+          <p class="text-muted"> <%= user.email %></p>
+        </div>
+      </div>
+    </div>
+</div>

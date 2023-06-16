@@ -1,0 +1,12 @@
+.navbar-brand .zenhub {
+  color: white;
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.nav-item .yellow-link {
+  color: white;
+}
+.nav-item .yellow-link:hover {
+  color: black;
+}/*# sourceMappingURL=header.css.map */

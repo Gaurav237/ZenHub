@@ -12,6 +12,11 @@ const MongoStore = require('connect-mongo');
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
 
+app.use(express.static('./assets'));
+
+app.use(require('express-ejs-layouts'));
+app.set('layout extractStyles', true);
+app.set('layout extractScripts', true);
 
 // setting up template view engine
 app.set('view engine', 'ejs');

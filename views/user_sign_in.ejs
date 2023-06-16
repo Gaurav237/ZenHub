@@ -1,7 +1,28 @@
-<h1>User / Sign In</h1>
+<link rel="stylesheet" href="/css/user-sign-in.css">
 
-<form action="/users/create-session" method="POST">
-    <input type="text" name="email" placeholder="Your Email" required>
-    <input type="password" name="password" placeholder="Password" required>
-    <input type="submit" value="Sign In">
-</form>
+<div class="form-container">
+    <div class="form-box">
+      <h1>Sign In</h1>
+  
+      <form action="/users/create-session" method="POST">
+          <div class="input-group">
+            <div class="input-field">
+              <i class="fa-solid fa-envelope"></i>
+              <input type="text" name="email" placeholder="Your Email" required>
+            </div>
+  
+            <div class="input-field">
+              <i class="fa-solid fa-lock"></i>
+              <input type="password" name="password" placeholder="Password" required>
+            </div>
+  
+          </div>
+          <div class="btn-field">
+            <button type="submit">Login</button>
+          </div>
+
+          <p>Not a member ? <a href="/users/sign-up">Register</a></p>
+      </form>
+    </div>
+  </div>
+  
