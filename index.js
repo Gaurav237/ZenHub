@@ -4,6 +4,8 @@ const app = express();
 
 const db = require('./config/mongoose');
 
+app.use(express.urlencoded({extended: true}));
+
 // routes => for handling requests made to url('/')
 app.use('/', require('./routes'));
 
