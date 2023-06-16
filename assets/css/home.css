@@ -8,29 +8,16 @@
   width: 60%;
   padding: 20px;
   background-color: #f2f2f2;
+  overflow-y: auto;
 }
-.container #left-div h3 {
-  margin-top: 0;
-}
-.container #left-div #new-post-form {
-  margin-top: 20px;
-}
-.container #left-div #new-post-form textarea {
-  width: 100%;
-  padding: 10px;
-  resize: vertical;
-}
-.container #left-div #new-post-form input[type=submit] {
-  margin-top: 10px;
-  padding: 10px 20px;
-  background-color: #2871e6;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+.container #left-div #posts-list-container li {
+  list-style: none;
 }
 .container #right-div {
   width: 35%;
   padding: 20px;
   background-color: #e8e8e8;
+  position: sticky;
+  top: 20px;
+  overflow-y: auto;
 }/*# sourceMappingURL=home.css.map */
