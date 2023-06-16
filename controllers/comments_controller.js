@@ -24,3 +24,29 @@ module.exports.create = async function (req, res) {
         return res.redirect('/');
     }
 }
+
+
+// for deleting comments
+module.exports.destroy = async function(req, res) {
+
+    try {
+        const comment = await Comment.findById(req.params.id);
+
+        if(comment.user == req.user.id){
+            // we need to delete this comment && also from comments array in Post
+            let postId = comment.post;
+
+            // delete the comment
+            comment.deleteOne();
+
+            // delete this comment id from Post comments array
+            await Post.findByIdAndUpdate(postId, {$pull: {comments: req.params.id}});
+            
+            return res.redirect('back');
+        }else{
+            return res.redirect('back');
+        }
+    }catch(err){
+        return res.redirect('back');
+    }
+}

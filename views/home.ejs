@@ -66,9 +66,14 @@
                                                   <div>
                                                     <h6 class="mb-0 small text-muted"><%= comment.user.name %></h6>
                                                   </div>
+                                                  <!-- if (user is signed-in) && (user logged-in == user who created that comment)-->
+                                                  <% if ((locals.user) && (locals.user.id == comment.user.id)) { %> 
                                                     <div>
-                                                      <button class="btn btn-sm btn-danger"><i class="fa-solid fa-trash fa-xs"></i></button>
+                                                      <a href="/comments/destroy/<%= comment.id %>" class="btn btn-sm btn-danger">
+                                                        <i class="fa-solid fa-trash fa-xs"></i>
+                                                      </a>
                                                     </div>
+                                                  <% } %>
                                                 </div>
                                                 <p class="mb-0 font-weight-bold"><%= comment.content %></p>
                                               </li> 
