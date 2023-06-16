@@ -43,6 +43,15 @@
                               <div class="card">
                                 <div class="card-body">
                                   <h6 class="card-title">Comments</h6>
+                                  <% if (locals.user) { %>
+                                    <form action="/comments/create" method="POST" class="mb-3">
+                                      <div class="form-group d-flex">
+                                        <input type="text" class="form-control" name="post_content" placeholder="Type here to add a comment...">
+                                        <input type="hidden" name="post_id" value="<%= post._id %>">
+                                        <button type="submit" class="btn btn-primary ms-4">Comment</button>
+                                      </div>
+                                    </form>
+                                  <% } %>
                                   <!-- <ul class="list-group list-group-flush">
                                     <li class="list-group-item">Comment 1</li>
                                     <li class="list-group-item">Comment 2</li>
