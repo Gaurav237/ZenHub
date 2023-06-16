@@ -7,6 +7,7 @@ const db = require('./config/mongoose');
 const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-startegy');
+const MongoStore = require('connect-mongo');
 
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
@@ -24,7 +25,16 @@ app.use(session({
     resave: false, // will only save the session object to the session store if it has been modified during the request.
     cookie: {
         maxAge: (1000 * 60 * 100)  // expiry age(ms) of the session cookie
-    }
+    },
+    store: MongoStore.create(
+        {
+            mongoUrl: 'mongodb://127.0.0.1:27017/zenhub_db',
+            autoRemove: 'disabled'
+        },
+        function (err){
+            console.log(err || 'connect-mongodb setup ok');
+        }
+    )
 }));
 
 app.use(passport.initialize());  // initializes Passport.js.
