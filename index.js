@@ -1,10 +1,13 @@
 const express = require('express');
 const port = 8000;
+const cookieParser = require('cookie-parser');
 const app = express();
 
 const db = require('./config/mongoose');
 
 app.use(express.urlencoded({extended: true}));
+app.use(cookieParser());
+
 
 // routes => for handling requests made to url('/')
 app.use('/', require('./routes'));
