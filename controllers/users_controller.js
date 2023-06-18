@@ -94,14 +94,27 @@ module.exports.update = async function(req, res) {
 
     if (req.user.id == userId) {
         try {
-            await User.findByIdAndUpdate(userId, {
-                email: req.body.email,
-                name: req.body.name,
-                password: req.body.password
+            let user = await User.findById(userId);
+            
+            User.uploadedAvatar(req, res, async function(err) {
+                if(err) {
+                    console.log(err);
+                    return;
+                }
+
+                // console.log(req.file);
+                user.name = req.body.name;
+                user.email = req.body.email;
+
+                if(req.file){  // photo upload is not set required 
+                    // this saves the path of uploaded file into avatar field in user
+                    user.avatar = User.avatarPath + '/' + req.file.filename;
+                }
+
+                await user.save();
+                return res.redirect('back');
             });
 
-            req.flash('success', 'User information updated!');
-            return res.redirect('back');
         } catch (err) {
             req.flash('error', err);
             return res.redirect('back');

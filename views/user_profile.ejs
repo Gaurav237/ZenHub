@@ -5,7 +5,7 @@
   <div id="profile-info" class="row justify-content-center mt-5">
     <div class="col-md-6">
       <div class="text-center">
-        <img class="rounded-circle" src="https://static.vecteezy.com/system/resources/previews/005/544/718/original/profile-icon-design-free-vector.jpg" alt="Profile Image" width="200" height="200">
+        <img class="rounded-circle" src="<%= user.avatar %>" alt="<%= user.name %>-profile-pic" width="200" height="200">
       </div>
       <div class="text-center mt-3">
         <h2 class="font-weight-bold m-4"> <%= profile_user.name %> </h2>
@@ -20,8 +20,8 @@
         <div class="form-container">
           <div class="form-box">
             <h3>Update Profile Information</h3>
-            
-            <form action="/users/update/<%= profile_user.id %>" method="POST">
+
+            <form action="/users/update/<%= profile_user.id %>" method="POST" enctype="multipart/form-data">
               <div class="input-group">
                 <div class="input-field">
                   <i class="fa-solid fa-circle-camera"></i>

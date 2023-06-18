@@ -17,6 +17,9 @@ app.use(cookieParser());
 
 app.use(express.static('./assets'));
 
+// make the uploads path availaible to browser
+app.use('/uploads', express.static(__dirname + '/uploads'));
+
 app.use(require('express-ejs-layouts'));
 app.set('layout extractStyles', true);
 app.set('layout extractScripts', true);
