@@ -1,4 +1,6 @@
 const User = require('../models/user');
+const path = require('path');
+const fs = require('fs');
 
 module.exports.profile = async function(req, res) {
     try {
@@ -107,7 +109,28 @@ module.exports.update = async function(req, res) {
                 user.email = req.body.email;
 
                 if(req.file){  // photo upload is not set required 
-                    // this saves the path of uploaded file into avatar field in user
+
+                    // edge case: to replace the photo (i.e. delete previous pic if available and add new one)
+                    // Delete the previous photo if it exists
+                    if (user.avatar) {
+                        try {
+                            // Construct the path to the previous avatar
+                            const avatarPath = path.join(__dirname, '..', user.avatar);
+
+                            // Check if the file exists 
+                            if (fs.existsSync(avatarPath)) {
+                                // Delete the previous avatar file
+                                fs.unlinkSync(avatarPath);
+                            }
+                            // else
+                            // if file does not exists in '/uploads/users/avatar/' then just update "user.avatar"
+                        } catch (err) {
+                            console.log(err);
+                        }
+                    }
+                
+                
+                // this saves the path of uploaded file into avatar field in user
                     user.avatar = User.avatarPath + '/' + req.file.filename;
                 }
 
