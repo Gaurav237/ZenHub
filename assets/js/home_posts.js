@@ -16,7 +16,18 @@
                     // data => {data: {post}, message: "Post Created!"}
                     let newPost = newPostDOM(data.data.post);
                     $('#posts-list').prepend(newPost);
+                    
+                    // add delete using AJAX
+                    // looks for elements with the class "delete-post-button" within the DOM structure of the newPost element.
+                    deletePost($(' #delete-post-button', newPost));
 
+                    new Noty({
+                        theme: 'relax',
+                        text: 'Post Published !',
+                        type: 'success',
+                        layout: 'topRight',
+                        timeout: 1500
+                    }).show();
                 }, 
                 error : function (xhr, status, err) {
                     console.log(err);
@@ -39,7 +50,7 @@
                     <div class="col-md-10">
                     <div class="d-flex justify-content-between align-items-center">
                         <h6 class="card-subtitle mb-2 text-muted">${ post.user.name }</h6>
-                        <a id="delete-post-button" href="/posts/destroy/${ post.id }" class="btn btn-danger btn-sm">
+                        <a id="delete-post-button" href="/posts/destroy/${ post._id }" class="btn btn-danger btn-sm">
                             <i class="fa-solid fa-trash"></i>
                         </a>
                     </div>
@@ -84,6 +95,34 @@
             </div>
         </li>
         `);
+    }
+
+    // method to delete a post from DOM
+    let deletePost = function (deleteLink) {  // here passed on the <a> tag (class="delete-post-button") as deleteLink.
+        $(deleteLink).click(function(e){
+            e.preventDefault();
+
+            $.ajax({
+                type: 'get',
+                url: $(deleteLink).prop('href'),
+                success: function(data) {
+                    //The data object is received as a response from the server,
+                    // and the post_id property is accessed from it.
+                    $(`#post-${data.data.post_id}`).remove();
+
+                    new Noty({
+                        theme: 'relax',
+                        text: 'Post Deleted',
+                        type: 'success',
+                        layout: 'topRight',
+                        timeout: 1500
+                    }).show();
+                },
+                error: function(err){
+                    console.log(err.responseText);
+                }
+            })
+        })
     }
 
     createPost();
