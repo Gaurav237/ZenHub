@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="/css/home.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 <div class="container">
     <div id="left-div">
@@ -15,9 +16,9 @@
         <% } %>
 
         <div id="posts-list-container">
-            <ul>
+            <ul id="posts-list">
                 <% for(post of posts){ %>
-                  <li>
+                  <li id="post-<%= post._id %>">
                     <div class="card mb-3">
                       <div class="card-body">
                         <div class="row">
@@ -29,7 +30,7 @@
                               <h6 class="card-subtitle mb-2 text-muted"><%= post.user.name %></h6>
                               <!-- if (user is signed-in) && (user logged-in = who created that post) -->
                               <% if ((locals.user) && (locals.user.id == post.user.id)) { %> 
-                                <a href="/posts/destroy/<%= post.id %>" class="btn btn-danger btn-sm">
+                                <a id="delete-post-button" href="/posts/destroy/<%= post.id %>" class="btn btn-danger btn-sm">
                                   <i class="fa-solid fa-trash"></i>
                                 </a>
                               <% } %>
@@ -38,19 +39,19 @@
                             <div class="row">
                               <div class="col-md-6">
                                 <button class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-heart"></i> Like</button>
-                                <button class="btn btn-sm btn-outline-secondary ms-2" data-bs-toggle="collapse" data-bs-target="#commentsCollapse-<%= post.id %>" aria-expanded="false" aria-controls="commentsCollapse-<%= post.id %>"><i class="fa-solid fa-comment"></i> Comment</button>
+                                <button class="btn btn-sm btn-outline-secondary ms-2" data-bs-toggle="collapse" data-bs-target="#commentsCollapse-<%= post._id %>" aria-expanded="false" aria-controls="commentsCollapse-<%= post.id %>"><i class="fa-solid fa-comment"></i> Comment</button>
                               </div>
                               <div class="col-md-6 text-md-end">
                                 <small class="text-muted">Posted on: <%= post.createdAt.toISOString().substr(0,10) %></small>
                               </div>
                             </div>
-                            <div id="posts-list-container">
-                                <div class="collapse mt-3" id="commentsCollapse-<%= post.id %>">
+                            <div id="posts-comments">
+                                <div class="collapse mt-3" id="commentsCollapse-<%= post._id %>">
                                   <div class="card">
                                     <div class="card-body">
                                       <h6 class="card-title">Comments</h6>
                                       <% if (locals.user) { %>
-                                        <form action="/comments/create" method="POST" class="mb-3">
+                                        <form id="post-<%= post._id %>-comments-form" action="/comments/create" method="POST" class="mb-3">
                                           <div class="form-group d-flex">
                                             <input type="text" class="form-control" name="post_content" placeholder="Type here to add a comment..." required>
                                             <input type="hidden" name="post_id" value="<%= post._id %>">
@@ -118,3 +119,6 @@
        
     </div>
 </div>
+
+
+<script src="/js/home_posts.js"></script>
