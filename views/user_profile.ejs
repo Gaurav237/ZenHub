@@ -24,6 +24,11 @@
             <form action="/users/update/<%= profile_user.id %>" method="POST">
               <div class="input-group">
                 <div class="input-field">
+                  <i class="fa-solid fa-circle-camera"></i>
+                  <input type="file" name="avatar" placeholder="Profile Picture">
+                </div>
+
+                <div class="input-field">
                   <i class="fa-solid fa-user"></i>
                   <input type="text" name="name" placeholder="Your New Name" required>
                 </div>
