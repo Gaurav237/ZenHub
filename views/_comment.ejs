@@ -6,7 +6,7 @@
       <!-- if (user is signed-in) && (user logged-in == user who created that comment)-->
       <% if ((locals.user) && (locals.user.id == comment.user.id)) { %> 
         <div>
-          <a href="/comments/destroy/<%= comment.id %>" class="btn btn-sm btn-danger">
+          <a id="delete-comment-button" href="/comments/destroy/<%= comment.id %>" class="btn btn-sm btn-danger">
             <i class="fa-solid fa-trash fa-xs"></i>
           </a>
         </div>
