@@ -33,7 +33,7 @@
             <% for (u of all_users) { %>
             <li class="list-group-item friend-item">
                 <div class="d-flex align-items-center">
-                    <img src="https://w7.pngwing.com/pngs/419/473/png-transparent-computer-icons-user-profile-login-user-heroes-sphere-black-thumbnail.png" alt="Profile Picture" class="rounded-circle me-3" width="40" height="40">
+                    <img src="<%= u.avatar %>" alt="Profile Picture" class="rounded-circle me-3" width="40" height="40">
                     <a href="/users/profile/<%= u.id %>">
                         <%= u.name %>
                     </a>

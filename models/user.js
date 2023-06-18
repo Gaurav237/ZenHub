@@ -19,7 +19,8 @@ const userSchema = new mongoose.Schema({
         required: true
     },
     avatar: {
-        type: String
+        type: String,
+        default: path.join(AVATAR_PATH, 'default.png')
     }
 }, {
     timestamps: true

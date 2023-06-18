@@ -10,7 +10,7 @@ module.exports.create = async function(req, res) {
 
         if(req.xhr){
             // to pupulate the post with user
-            post = await post.populate('user', 'name');
+            post = await post.populate('user');
 
             return res.status(200).json({
                 data : {
