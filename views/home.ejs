@@ -51,6 +51,7 @@
     </section>
     <hr>
     <section id="user-friends">
+        <% if(locals.user ) { %> 
         <h4 class="mb-3">FRIENDS</h4>
         <ul class="list-group" id="friend-list">
             <% for (friendship of locals.user.friendships) { %>
@@ -64,6 +65,7 @@
             </li>
             <% } %>
         </ul>
+        <% } %>
     </section>
     <hr>
     </div>
