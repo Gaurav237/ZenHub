@@ -16,12 +16,12 @@ class ToggleFriendship {
                     console.log(data);
 
                     if (data.isFriend == false) {
-                        $(self).html('Remove Friendship');
+                        $(self).html('REMOVE');
                         const friendItem = `
                         <li class="friend-item list-group-item d-flex justify-content-between align-items-center" data-friend-id="${data.friend.id}">
                             <div class="d-flex align-items-center">
                             <img src="${data.friend.avatar}" alt="Profile Picture" class="rounded-circle me-3" width="40" height="40">
-                            <a href="/users/profile/${data.friend.id}">
+                            <a href="/users/profile/${data.friend.id}" class="user-a-name">
                                 ${data.friend.name}
                             </a>
                             </div>
@@ -29,7 +29,7 @@ class ToggleFriendship {
                         `;
                         $('#user-friends ul').append(friendItem);
                     } else {
-                        $(self).html('Add Friendship');
+                        $(self).html('ADD');
                         $('#user-friends ul').find(`[data-friend-id="${data.friend.id}"]`).remove();
 
                     }

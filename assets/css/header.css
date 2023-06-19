@@ -1,12 +1,31 @@
-.navbar-brand .zenhub {
+header .navbar {
+  background-color: #1D1842;
+}
+header .navbar .navbar-brand .zenhub {
   color: white;
   font-size: 36px;
   font-weight: bold;
+  padding: 4px 10px;
+  margin-left: 20px;
 }
-
-.nav-item .yellow-link {
+header .navbar .navbar-brand .zenhub:hover {
+  color: #FDA1A2;
+  background-color: #0C1A1A;
+  border-radius: 10px;
+  border: 1px solid #FDA1A2;
+}
+header .navbar #navbarNav .nav-item {
+  margin: 0 10px;
+}
+header .navbar #navbarNav .nav-item .nav-link {
   color: white;
+  font-weight: bold;
 }
-.nav-item .yellow-link:hover {
-  color: black;
+header .navbar #navbarNav .nav-item .nav-link:hover {
+  color: #FDA1A2;
+}
+header .navbar #navbarNav .nav-item:hover {
+  border: 1px solid #FDA1A2;
+  border-radius: 10px;
+  background-color: black;
 }/*# sourceMappingURL=header.css.map */

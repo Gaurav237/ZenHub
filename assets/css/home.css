@@ -1,23 +1,59 @@
-.container {
+body {
+  background-color: #f5fefd;
+}
+body .container {
+  background-color: #f5fefd;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   width: 100%;
 }
-.container #left-div {
+body .container #left-div {
   width: 60%;
   padding: 20px;
-  background-color: #f2f2f2;
+  background-color: #f7f7f7;
   overflow-y: auto;
+  border: 1px solid #CCCCCC;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 10px 0 10px 0;
 }
-.container #left-div #posts-list-container li {
+body .container #left-div #posts-list-container li {
   list-style: none;
 }
-.container #right-div {
+body .container #right-div {
+  margin-top: 10px;
   width: 35%;
   padding: 20px;
-  background-color: #e8e8e8;
+  background-color: #f7f7f7;
   position: sticky;
   top: 20px;
   overflow-y: auto;
+  border: 1px solid #CCCCCC;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+body .container #right-div section {
+  border: 1px solid #CCCCCC;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+body .container #right-div section .list-group-item {
+  margin: 1px 0 1px 0;
+  border: 1px solid #CCCCCC;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #f5fefd;
+}
+body .container #right-div section .list-group-item .user-a-name {
+  text-decoration: none;
+  font-size: large;
+  color: black;
+  font-weight: bold;
+}
+body .container #right-div section .list-group-item .user-a-name:hover {
+  text-decoration: underline;
+  padding-left: 10px;
 }/*# sourceMappingURL=home.css.map */

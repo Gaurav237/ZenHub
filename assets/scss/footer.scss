@@ -1,0 +1,44 @@
+footer {
+    background-color: #1D1842;
+
+    .container{
+        background-color: #1D1842;
+
+        .social-icons{
+            font-size: 24px;
+
+            i:hover {
+                color: #FDA1A2;
+                border: 1px solid #FDA1A2;
+                border-radius: 50%;
+                background-color: black;
+                font-size: 35px;
+                width: 40px; /* Adjust the width and height to desired size */
+                height: 40px;
+                line-height: 40px; /* Vertically center the icon within the circle */
+                text-align: center;
+            }
+            
+        }
+
+        ul {
+            li {
+                margin: 5px;
+                padding: 2px;
+
+                a {
+                    text-decoration: none;
+
+                    &:hover{
+                        color: #FDA1A2;
+                        border: 1px solid #FDA1A2;
+                        border-radius: 5px;
+                        padding: 5px;
+                        background-color: black;
+                    }
+                }
+                
+            }
+        }
+    }
+}

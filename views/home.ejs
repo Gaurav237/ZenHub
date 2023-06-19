@@ -34,14 +34,14 @@
             <li class="list-group-item friend-item d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center">
                     <img src="<%= u.avatar %>" alt="Profile Picture" class="rounded-circle me-3" width="40" height="40">
-                    <a href="/users/profile/<%= u.id %>">
+                    <a href="/users/profile/<%= u.id %>" class="user-a-name">
                         <%= u.name %>
                     </a>
                 </div>
                 <% if (locals.user && locals.user.id != u.id) { %>
                     <div>
-                        <a href="/friendship/toggle?fromUserId=<%= locals.user.id %>&toUserId=<%= u.id %>" class="toggle-friendship-button btn btn-secondary">
-                            Toggle Friendship
+                        <a href="/friendship/toggle?fromUserId=<%= locals.user.id %>&toUserId=<%= u.id %>" class="toggle-friendship-button btn btn-outline-secondary">
+                            ADD / REMOVE
                         </a>
                     </div>
                 <% } %>
@@ -58,7 +58,7 @@
             <li class="friend-item list-group-item d-flex justify-content-between align-items-center" data-friend-id="<%= friendship.to_user.id %>">
                 <div class="d-flex align-items-center">
                     <img src="<%= friendship.to_user.avatar %>" alt="Profile Picture" class="rounded-circle me-3" width="40" height="40">
-                    <a href="/users/profile/<%= friendship.to_user.id %>">
+                    <a href="/users/profile/<%= friendship.to_user.id %>" class="user-a-name">
                         <%= friendship.to_user.name %>
                     </a>
                 </div>
