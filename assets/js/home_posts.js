@@ -24,6 +24,9 @@
                     // calling this class to create Comments
                     new PostComments(data.data.post._id);
 
+                    // [CHANGE] enable the functionality of the toggle like button on the new post
+                    new ToggleLike($(' .toggle-like-button', newPost));
+
                     new Noty({
                         theme: 'relax',
                         text: 'Post Published !',
@@ -60,7 +63,11 @@
                     <p class="card-text">${ post.content }</p>
                     <div class="row">
                         <div class="col-md-6">
-                        <button class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-heart"></i> Like</button>
+                        <a href="/likes/toggle/?id=${ post._id }&type=Post" data-likes="0" class="toggle-like-button btn btn-sm btn-primary">
+                            <i class="fa-solid fa-heart"></i> 
+                            0 Likes
+                        </a>
+
                         <button class="btn btn-sm btn-outline-secondary ms-2" data-bs-toggle="collapse" data-bs-target="#commentsCollapse-${ post._id }" aria-expanded="false" aria-controls="commentsCollapse-<%= post.id %>"><i class="fa-solid fa-comment"></i> Comment</button>
                         </div>
                         <div class="col-md-6 text-md-end">

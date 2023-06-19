@@ -34,6 +34,9 @@ class PostComments{
                     // add delete function usign AJAX
                     postCommentsSelf.deleteComment($(' #delete-comment-button', newComment));
 
+                    // [CHANGE] enable the functionality of the toggle like button on the new comment 
+                    new ToggleLike($(' .toggle-like-button', newComment));
+                    
                     new Noty({
                         theme: 'metroui',
                         text: "Comment published!",
@@ -65,6 +68,11 @@ class PostComments{
             </div>
             </div>
             <p class="mb-0 font-weight-bold">${ comment.content }</p>
+            
+            <a data-likes="0" href="/likes/toggle/?id=${ comment._id }&type=Comment" class="toggle-like-button btn btn-sm btn-primary">
+                <i class="fa-solid fa-heart"></i> 
+                0 Likes
+            </a>
         </li> 
         `);
     }

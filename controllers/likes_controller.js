@@ -1,7 +1,7 @@
 const Like = require('../models/like');
 const Post = require('../models/post');
 const User = require('../models/user');
-
+const Comment = require('../models/comment');
 
 module.exports.toggleLike = async function(req, res){
     try{
@@ -13,7 +13,7 @@ module.exports.toggleLike = async function(req, res){
             likeable = await Post.findById(req.query.id)
                         .populate('likes');
         }else{
-            likeable = await Comment.findById(req.body.id)
+            likeable = await Comment.findById(req.query.id)
                         .populate('likes');
         }
 
@@ -46,18 +46,17 @@ module.exports.toggleLike = async function(req, res){
             likeable.save();
         }
 
-        return res.json(200).json({
+        return res.status(200).json({
             message: 'Request successfull',
-
-        })
+            data: {
+                deleted: deleted
+            }
+        });
 
     }catch(err){
         console.log(err);
         return res.status(500).json({
-            message: 'Internal Server Error',
-            data: {
-                deleted: deleted
-            }
-        })
+            message: 'Internal Server Error'
+        });
     }
 }
