@@ -26,6 +26,7 @@
     </div>
 
     <div id="right-div">
+    <hr>
     <section id="all-users">
         <h4 class="mb-3">ALL USERS</h4>
         <ul class="list-group">
@@ -48,7 +49,23 @@
             <% } %>
         </ul>
     </section>
-       
+    <hr>
+    <section id="user-friends">
+        <h4 class="mb-3">FRIENDS</h4>
+        <ul class="list-group" id="friend-list">
+            <% for (friendship of locals.user.friendships) { %>
+            <li class="friend-item list-group-item d-flex justify-content-between align-items-center" data-friend-id="<%= friendship.to_user.id %>">
+                <div class="d-flex align-items-center">
+                    <img src="<%= friendship.to_user.avatar %>" alt="Profile Picture" class="rounded-circle me-3" width="40" height="40">
+                    <a href="/users/profile/<%= friendship.to_user.id %>">
+                        <%= friendship.to_user.name %>
+                    </a>
+                </div>
+            </li>
+            <% } %>
+        </ul>
+    </section>
+    <hr>
     </div>
 </div>
 

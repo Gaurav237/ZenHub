@@ -18,7 +18,8 @@ module.exports.toggleFriendship = async function(req, res){
         let existingFriendship = await Friendship.findOne({
             from_user: fromUser,
             to_user: toUser
-        });
+        })
+        .populate('to_user', 'name avatar');
 
         if (existingFriendship) {
             // If already friends, unfriend/cancel the friend request
@@ -35,7 +36,10 @@ module.exports.toggleFriendship = async function(req, res){
 
             return res.status(200).json({ 
                 message: 'Friendship removed successfully',
-                isFriend: true
+                isFriend: true,
+                friend: {
+                    id: toUser._id,
+                }
             });
         }else{
             // If not friends, send a friend request
@@ -55,7 +59,12 @@ module.exports.toggleFriendship = async function(req, res){
 
             return res.status(200).json({
                 message: 'Friend request sent successfully',
-                isFriend: false
+                isFriend: false,
+                friend: {
+                    id: toUser._id,
+                    name: toUser.name,
+                    avatar: toUser.avatar
+                }
             });
         }
 

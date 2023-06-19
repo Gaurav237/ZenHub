@@ -17,8 +17,21 @@ class ToggleFriendship {
 
                     if (data.isFriend == false) {
                         $(self).html('Remove Friendship');
+                        const friendItem = `
+                        <li class="friend-item list-group-item d-flex justify-content-between align-items-center" data-friend-id="${data.friend.id}">
+                            <div class="d-flex align-items-center">
+                            <img src="${data.friend.avatar}" alt="Profile Picture" class="rounded-circle me-3" width="40" height="40">
+                            <a href="/users/profile/${data.friend.id}">
+                                ${data.friend.name}
+                            </a>
+                            </div>
+                        </li>
+                        `;
+                        $('#user-friends ul').append(friendItem);
                     } else {
                         $(self).html('Add Friendship');
+                        $('#user-friends ul').find(`[data-friend-id="${data.friend.id}"]`).remove();
+
                     }
 
                     console.log(data.message);
