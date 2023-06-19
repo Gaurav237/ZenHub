@@ -4,13 +4,25 @@
         <h6 class="mb-0 small text-muted"><%= comment.user.name %></h6>
       </div>
       <!-- if (user is signed-in) && (user logged-in == user who created that comment)-->
-      <% if ((locals.user) && (locals.user.id == comment.user.id)) { %> 
+      <% if ((locals.user) && (locals.user.id == comment.user._id)) { %> 
         <div>
-          <a id="delete-comment-button" href="/comments/destroy/<%= comment.id %>" class="btn btn-sm btn-danger">
+          <a id="delete-comment-button" href="/comments/destroy/<%= comment._id %>" class="btn btn-sm btn-danger">
             <i class="fa-solid fa-trash fa-xs"></i>
           </a>
         </div>
       <% } %>
     </div>
     <p class="mb-0 font-weight-bold"><%= comment.content %></p>
+    <% if (locals.user){ %>
+      <a href="/likes/toggle/?id=<%=comment._id%>&type=Comment" data-likes="<%= comment.likes.length %>" class="toggle-like-button btn btn-sm btn-primary">
+        <i class="fa-solid fa-heart"></i> 
+        <%= comment.likes.length %> Likes
+      </a>
+    <% } else { %>
+      <a class="btn btn-sm btn-primary">
+        <i class="fa-solid fa-heart"></i>
+        <%= comment.likes.length %> Likes
+      </a>
+    <% } %>
+    
 </li> 

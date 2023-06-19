@@ -18,8 +18,22 @@
             <p class="card-text"><%= post.content %></p>
             <div class="row">
               <div class="col-md-6">
-                <button class="btn btn-sm btn-outline-primary"><i class="fa-solid fa-heart"></i> Like</button>
-                <button class="btn btn-sm btn-outline-secondary ms-2" data-bs-toggle="collapse" data-bs-target="#commentsCollapse-<%= post._id %>" aria-expanded="false" aria-controls="commentsCollapse-<%= post.id %>"><i class="fa-solid fa-comment"></i> Comment</button>
+                <!-- [CHANGE] display likes of this post, if the user is logged in, then show the link to toggle likes, else just show the count -->
+                <% if(locals.user) { %>
+                  <a href="/likes/toggle/?id=<%=post._id%>&type=Post" data-likes="<%= post.likes.length %>" class="toggle-like-button btn btn-sm btn-primary">
+                    <i class="fa-solid fa-heart"></i> 
+                    <%= post.likes.length %> Likes
+                  </a>
+                <% }else { %>
+                  <a class="btn btn-sm btn-primary">
+                    <i class="fa-solid fa-heart"></i> 
+                    <%= post.likes.length %> Likes
+                  </a>
+                <% } %>
+
+                <button class="btn btn-sm btn-outline-secondary ms-2" data-bs-toggle="collapse" data-bs-target="#commentsCollapse-<%= post._id %>" aria-expanded="false" aria-controls="commentsCollapse-<%= post.id %>">
+                  <i class="fa-solid fa-comment"></i> Comment
+                </button>
               </div>
               <div class="col-md-6 text-md-end">
                 <small class="text-muted">Posted on: <%= post.createdAt.toISOString().substr(0,10) %></small>
