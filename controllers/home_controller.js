@@ -15,7 +15,7 @@ module.exports.home = async function(req, res){
             ]})
             .populate('likes');
 
-        let users = await User.find({}); 
+        let users = await User.find({});
 
         return res.render('home', { 
             title: 'Home', 
@@ -24,6 +24,9 @@ module.exports.home = async function(req, res){
         }); 
     }catch(err){
         console.log('error in fetching posts from db');
+        return res.status(500).json({ 
+            error: 'An error occurred while fetching posts.' 
+        });
     }
 }
 
