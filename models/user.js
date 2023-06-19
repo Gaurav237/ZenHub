@@ -21,7 +21,13 @@ const userSchema = new mongoose.Schema({
     avatar: {
         type: String,
         default: path.join(AVATAR_PATH, 'default.png')
-    }
+    },
+    friendships: [
+        { 
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Friendship' 
+        }
+    ]
 }, {
     timestamps: true
 });

@@ -15,15 +15,25 @@ module.exports.home = async function(req, res){
             ]})
             .populate('likes');
 
-        let users = await User.find({}); 
+        let users = await User.find({});
+
+        // Populate user.friendships with to_user information
+        let populatedUser = await User.findById(req.user.id).populate({
+            path: 'friendships',
+            populate: { path: 'to_user' }
+        });
 
         return res.render('home', { 
             title: 'Home', 
             posts: posts, 
-            all_users: users
+            all_users: users,
+            user: populatedUser
         }); 
     }catch(err){
         console.log('error in fetching posts from db');
+        return res.status(500).json({ 
+            error: 'An error occurred while fetching posts.' 
+        });
     }
 }
 
